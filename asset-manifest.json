@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/cake-app/static/css/main.f577f63b.css",
+    "main.js": "/cake-app/static/js/main.c9a82384.js",
+    "static/js/787.5fc97e39.chunk.js": "/cake-app/static/js/787.5fc97e39.chunk.js",
+    "static/media/balladyna-smaker-1-1.jpg": "/cake-app/static/media/balladyna-smaker-1-1.e94a2de3acd318510a08.jpg",
+    "static/media/desserts.jpg": "/cake-app/static/media/desserts.99e3634f44ae39ed0f09.jpg",
+    "static/media/pasta-gdad9646c0_1280.jpg": "/cake-app/static/media/pasta-gdad9646c0_1280.37b66f80668f8cffbfc5.jpg",
+    "static/media/herbs-g96e2f6537_1280.jpg": "/cake-app/static/media/herbs-g96e2f6537_1280.3b6f5662d030c05c9cba.jpg",
+    "static/media/small-cake-gd6f70e349_640.jpg": "/cake-app/static/media/small-cake-gd6f70e349_640.8fb148dea53926220024.jpg",
+    "static/media/cookie.png": "/cake-app/static/media/cookie.c86c522b51ddb3440a77.png",
+    "index.html": "/cake-app/index.html",
+    "main.f577f63b.css.map": "/cake-app/static/css/main.f577f63b.css.map",
+    "main.c9a82384.js.map": "/cake-app/static/js/main.c9a82384.js.map",
+    "787.5fc97e39.chunk.js.map": "/cake-app/static/js/787.5fc97e39.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f577f63b.css",
+    "static/js/main.c9a82384.js"
+  ]
+}
