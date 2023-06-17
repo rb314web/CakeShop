@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+
+import Navigation from './components/navigation';
+import Header from './components/header';
+import Products from './components/products';
+import About from './components/about';
+import Footer from './components/footer';
+import Offer from './components/offer';
+import {Basket123} from './components/basket'
+
+import { Context } from './components/context';
+
+import cookies from './components/cookies'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [context, setContext] = useState<any>([]);
+
+	useEffect(() => {
+		if (!!cookies.get('cont')) {setContext(cookies.get('cont'))}
+	}, []);
+
+	useEffect(() => {
+		cookies.set('cont', context);
+	},[context])
+	return (
+		<Context.Provider value={[context, setContext]}>
+			<Navigation />
+			<Header />
+			{/* <Routes>
+				<Route index element={<Header />} />
+				<Route path='/products' element={<p>dfd123</p>} />
+				<Route path='/contacts' element={<p>1fdfdf23</p>} />
+			</Routes> */}
+			<Products />
+			<Basket123/>
+			<About />
+			<Offer />
+			<Footer />
+		</Context.Provider>
+	);
 }
 
 export default App;

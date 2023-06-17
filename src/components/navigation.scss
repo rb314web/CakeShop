@@ -1,0 +1,130 @@
+.navigation {
+	position: absolute;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 80px;
+	width: 100%;
+	z-index: 100;
+
+	&_bars {
+		display: none;
+		justify-content: center;
+		align-items: center;
+		width: 50px;
+		height: 50px;
+		display: none;
+		color: white;
+		cursor: pointer;
+
+		span {
+			display: block;
+			width: 35px;
+			height: 5px;
+			background-color: white;
+			border-radius: 8px;
+
+			&::after,
+			&::before {
+				content: '';
+				display: block;
+				width: 35px;
+				height: 5px;
+				background-color: white;
+				border-radius: 8px;
+				transform: translateY(5px);
+			}
+
+			&::before {
+				transform: translateY(-10px);
+			}
+		}
+	}
+
+	&_logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 35px;
+		color: white;
+
+		&_img {
+			height: 45px;
+			margin-right: 15px;
+		}
+	}
+
+	&_item {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		list-style: none;
+
+		li {
+			margin: 0 10px;
+
+			a {
+				color: white;
+				text-decoration: none;
+
+				img {
+					height: 40px;
+				}
+			}
+		}
+
+		span {
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: block;
+			text-align: center;
+			line-height: 25px;
+			background-color: red;
+			color: white;
+			width: 25px;
+			height: 25px;
+			border-radius: 50px;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.navigation {
+		justify-content: space-between;
+		padding: 0 20px;
+		&_item {
+			position: fixed;
+			top: 0;
+			right: 0;
+			flex-direction: column;
+			background: #c0c0c0;
+			width: 100vw;
+			height: 100vh;
+			transform: translatex(100vw);
+			transition: 1s;
+
+			li {
+				padding: 20px;
+				a {
+					font-size: 25px;
+					color: black;
+				}
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			&_active {
+				transform: translatex(0);
+			}
+		}
+
+		&_bars {
+			display: flex;
+			z-index: 1000;
+		}
+	}
+}

@@ -1,0 +1,114 @@
+.basket {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    width: 500px;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    font-size: 25px;
+    padding: 20px;
+    transform: translateX(500px);
+    transition: transform 1s;
+    color: black;
+    z-index: 1000;
+    overflow-y: scroll;
+
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+        padding: 10px 25px;
+        font-size: 15px;
+        border-radius: 8px;
+        border: none;
+        color: white;
+        background-color: #078ff2;
+        cursor: pointer;
+    }
+
+    &_active {
+        transform: translateX(0);
+    }
+
+    &_top {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        width: 100%;
+        border-bottom: 1px solid black;
+
+        p {
+            padding: 8px 0;
+        }
+
+        span {
+            cursor: pointer;
+        }
+    }
+
+    &_items {
+        display: flex;
+        flex-direction: column;
+
+        &_item {
+
+            padding: 20px 0;
+            h2 {
+                padding: 5px 0;
+                font-size: 20px;
+                font-weight: 400;
+            }
+            &_ingredients{
+                padding: 0 15px;
+                color: #555;
+                font-size: 15px;
+            }
+            img {
+                width: 100px;
+                height: 120px;
+                border-radius: 8px;
+            }
+
+            &_wrapper {
+                display: flex;
+                padding: 20px 0;
+            }
+            &_wrapper2 {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;align-items: center;
+
+                select {
+                    border: none;
+                }
+            }
+
+            &_price {
+                font-size: 25px;
+            }
+
+            &::after {
+                content: '';
+                display: block;
+                height: 1px;
+                width: 100%;
+                background-color: #999;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .basket {
+        width: 100%;
+        transform: translateX(100vw);
+
+        &_active {
+            transform: translateX(0);
+        }
+    }
+}
