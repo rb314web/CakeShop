@@ -1,4 +1,48 @@
 .App {
-  text-align: center;
-  overflow: hidden;
+	text-align: center;
+	overflow: hidden;
+}
+
+button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+	padding: 10px 25px;
+	font-size: 15px;
+	border-radius: 8px;
+	border: none;
+	color: white;
+	background-color: #078ff2;
+	cursor: pointer;
+}
+
+.fadeIn {
+	animation: .2s fadeIn forwards;
+}
+
+.fadeOut {
+	animation: .2s fadeOut forwards;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: translate(-20px, 0);
+	}
+	100% {
+		transform: translate(0px, 0px);
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 0;
+		transform: translate(0px, 0px);
+	}
+	100% {
+		transform: translate(-20px, 0);
+		opacity: 0;
+	}
 }

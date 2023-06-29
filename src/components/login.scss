@@ -1,0 +1,31 @@
+.login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+
+	&_section {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 20px;
+		background-color: #fff;
+
+		&_form {
+            display: flex;
+            flex-direction: column;
+
+			&_item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+				input {
+					margin: 10px;
+					padding: 5px;
+				}
+
+			}
+		}
+	}
+}

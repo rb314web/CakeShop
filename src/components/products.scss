@@ -3,6 +3,7 @@
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: center;
+	padding-top: 200px;
 
 	&_item {
 		display: flex;
@@ -14,6 +15,9 @@
 		align-items: center;
 		background-color: #fff;
 		border-radius: 8px;
+		box-shadow: 0px 0px 14px -6px rgba(66, 68, 90, 1);
+
+
 		overflow: hidden;
 
 		&_price {

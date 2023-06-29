@@ -1,12 +1,38 @@
-import { useContext } from 'react';
+import { useContext,useState,useEffect } from 'react';
 import { Context } from './context';
-import { items } from '../components/items';
+
+import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
+import { db } from '../utils/firebase'
 
 import './basket.scss';
 import {ReactComponent as X} from '../x .svg'
 
 export const Basket123 = () => {
 	const [context, setContext] = useContext<any>(Context);
+	const [data, setDate] = useState<any>([]);
+
+	const collectionRef = collection(db, 'testbase');
+
+	useEffect(() => {
+		const getTodo = async () => {
+
+			let x:any = []
+
+		  await getDocs(collectionRef).then((todo) => {
+			  todo.forEach(doc => {
+
+				x = [...x, doc.data()]
+
+				console.log('dsdsds',x);
+				setDate( x)
+			})
+
+		}).catch((err) => {
+			console.log(err);
+			})
+		  }
+		getTodo()
+		}, [])
 
 	const toogleBasket = () => {
 		const basket = document.querySelector('.basket');
@@ -17,7 +43,7 @@ export const Basket123 = () => {
 		let w: number = 0;
 
 		context.map((y: any) => {
-			const obj = items.find((x) => x.id === y.id);
+			const obj = data.find((x:any) => x.id === y.id);
 
 			w = (obj!.price * y.quantity) / 100 + w;
 		});
@@ -26,7 +52,7 @@ export const Basket123 = () => {
 
 	const basketItem = (id: number, quantity: number) => {
 		const findObject = () => {
-			return items.findIndex((x) => x.id === id);
+			return data.findIndex((x:any) => x.id === id);
 		};
 		let w = findObject();
 
@@ -64,42 +90,44 @@ export const Basket123 = () => {
 				)
 			);
 
+			console.log(value);
+
 			let wq = context.filter(function (e: { id: number }) {
-				return e.id !== value;
+				return Number(e.id) !== value;
 			});
 
 			console.log(e);
 			setContext(wq);
 		};
 
-		const price = (items: { price: number }, quantity: number) => {
-			return (items.price * quantity) / 100;
+		const price = (data: { price: number }, quantity: number) => {
+			return (data.price * quantity) / 100;
 		};
 
 		return (
-			<div data-value={items[w].id} className='basket_items_item'>
+			<div data-value={data[w].id} className='basket_items_item'>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<h2>{items[w].name}</h2>
+					<h2>{data[w].name}</h2>
 					<span style={{cursor: 'pointer'}} onClick={(e) => deleteItem(e)}>x</span>
 				</div>
 				<div className='basket_items_item_wrapper'>
-					<img src={items[w].img}></img>
+					<img src={data[w].img}></img>
 
 					<div>
 						<p className='basket_items_item_ingredients'>
-							{items[w].ingredients}
+							{data[w].ingredients}
 						</p>
 						<div className='basket_items_item_wrapper2'>
 							<button
-								onClick={() => changeWeight('subtract', 100, items[w].id)}>
+								onClick={() => changeWeight('subtract', 100, data[w].id)}>
 								-
 							</button>
 							<p>{test(id)}g</p>
-							<button onClick={() => changeWeight('add', 500, items[w].id)}>
+							<button onClick={() => changeWeight('add', 500, data[w].id)}>
 								+
 							</button>
 							<p className='basket_items_item_price'>
-								{price(items[w], quantity)} zł
+								{price(data[w], quantity)} zł
 							</p>
 						</div>
 					</div>

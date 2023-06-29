@@ -9,10 +9,36 @@ import User from '../User.png';
 
 import { Context } from './context';
 
-import { items } from '../components/items';
+import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
+import { db } from '../utils/firebase'
 
 const Navigation = () => {
 	const [context, setContext] = useContext<any>(Context);
+
+	const [data, setDate] = useState<any>([]);
+
+	const collectionRef = collection(db, 'testbase');
+
+	useEffect(() => {
+		const getTodo = async () => {
+
+			let x:any = []
+
+		  await getDocs(collectionRef).then((todo) => {
+			  todo.forEach(doc => {
+
+				x = [...x, doc.data()]
+
+				console.log('dsdsds',x);
+				setDate( x)
+			})
+
+		}).catch((err) => {
+			console.log(err);
+			})
+		  }
+		getTodo()
+		}, [])
 
 	useEffect(() => {
 		SummaryPrice();
@@ -32,7 +58,7 @@ const Navigation = () => {
 
 	const basketItem = (id: number, quantity: number) => {
 		const findObject = () => {
-			return items.findIndex((x) => x.id === id);
+			return data.findIndex((x:any) => x.id === id);
 		};
 		let w = findObject();
 
@@ -64,29 +90,29 @@ const Navigation = () => {
 		};
 
 		return (
-			<div data-value={items[w].id} className='navigation_basket_items_item'>
+			<div data-value={data[w].id} className='navigation_basket_data_item'>
 				<div style={{display: 'flex', justifyContent: 'space-between'}}>
-					<h2>{items[w].name}</h2>
+					<h2>{data[w].name}</h2>
 					<p onClick={(e) => deleteItem(e)}>X</p>
 				</div>
-				<div className='navigation_basket_items_item_wrapper'>
-					<img src={items[w].img}></img>
+				<div className='navigation_basket_data_item_wrapper'>
+					<img src={data[w].img}></img>
 
 					<div>
-						<p className='navigation_basket_items_item_ingredients'>
-							{items[w].ingredients}
+						<p className='navigation_basket_data_item_ingredients'>
+							{data[w].ingredients}
 						</p>
-						<div className='navigation_basket_items_item_wrapper2'>
+						<div className='navigation_basket_data_item_wrapper2'>
 								<button
-									onClick={() => changeWeight('subtract', 100, items[w].id)}>
+									onClick={() => changeWeight('subtract', 100, data[w].id)}>
 									-
 								</button>
 							<p>{test(id)}g</p>
-							<button onClick={() => changeWeight('add', 500, items[w].id)}>
+							<button onClick={() => changeWeight('add', 500, data[w].id)}>
 								+
 							</button>
-							<p className='navigation_basket_items_item_price'>
-								{price(items[w], quantity)} zł
+							<p className='navigation_basket_data_item_price'>
+								{price(data[w], quantity)} zł
 							</p>
 						</div>
 					</div>
@@ -99,15 +125,15 @@ const Navigation = () => {
 		let w: number = 0;
 
 		context.map((y: any) => {
-			const obj = items.find((x) => x.id === y.id);
+			const obj = data.find((x:any) => x.id === y.id);
 
 			w = (obj!.price * y.quantity) / 100 + w;
 		});
 		return w;
 	};
 
-	const price = (items: { price: number }, quantity: number) => {
-		return (items.price * quantity) / 100;
+	const price = (data: { price: number }, quantity: number) => {
+		return (data.price * quantity) / 100;
 	};
 
 	const deleteItem = (e: any) => {
@@ -123,9 +149,11 @@ const Navigation = () => {
 
 	return (
 		<nav className='navigation'>
+			<Link to='/'>
 			<div className='navigation_logo'>
 				<img className='navigation_logo_img' src={Cookie}></img> Ciasta
 			</div>
+			</Link>
 			<div onClick={basket2} className='navigation_bars'>
 				<span></span>
 			</div>
@@ -137,10 +165,10 @@ const Navigation = () => {
 					<Link to='/products'>Produkty</Link>
 				</li>
 				<li>
-					<Link to='/contacts'>Kontakt</Link>
+					<Link to='/contact'>Kontakt</Link>
 				</li>
-				<li>
-					<Link to='/user'>
+				<li className='navigation_item_user'>
+					<Link to='/login'>
 						<img src={User}></img>
 					</Link>
 				</li>
@@ -149,30 +177,6 @@ const Navigation = () => {
 					{context?.length > 0 ? <span>{context.length}</span> : null}
 				</li>
 			</div>
-
-			{/* <Basket123/> */}
-			{/* <div className='navigation_basket'>
-				<div className='navigation_basket_top'>
-					<p>Koszyk</p>
-					<p onClick={basket1}>X</p>
-				</div>
-
-				{!!context.length && (
-					<>
-						<div className='navigation_basket_items'>
-							{context.map((e: any) => {
-								return Basket123(e.id, e.quantity);
-							})}
-						</div>
-						<div className='navigation_basket_summary'>
-							<p>Łącznie: {SummaryPrice()} zł</p>
-						</div>
-						<p>+ koszt dostawy</p>
-						<button>Zamawiam</button>
-					</>
-				)}
-				{!context.length && <p>Dodaj coś do koszyka</p>}
-			</div> */}
 		</nav>
 	);
 };

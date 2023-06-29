@@ -1,12 +1,69 @@
 import './products.scss';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import {
+	collection,
+	addDoc,
+	doc,
+	deleteDoc,
+	getDocs,
+} from 'firebase/firestore';
+
+import { db } from '../utils/firebase';
 
 import { Context } from './context';
 
-import { items } from '../components/items';
-
 const Products = () => {
 	const [context, setContext] = useContext<any>(Context);
+	const [data, setDate] = useState<any>([]);
+	const [formData, setFormData] = useState({
+		id: '',
+		name: '',
+		price: '',
+		ingredients: '',
+		img: '',
+	});
+
+	const handleChange = (e: any) => {
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+		addDoc(collectionRef, formData)
+			.then((docRef) => {
+				console.log('Document has been added successfully');
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		console.log(formData);
+	};
+
+	const collectionRef = collection(db, 'testbase');
+
+	useEffect(() => {
+		const getTodo = async () => {
+			let x: any = [];
+
+			await getDocs(collectionRef)
+				.then((todo) => {
+					todo.forEach((doc) => {
+						x = [...x, doc.data()];
+
+						console.log(x);
+						setDate(x);
+					});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		};
+		getTodo();
+	}, []);
 
 	const addItem = (e: any, id: number) => {
 		const quantity = Number(e.target.previousSibling.value);
@@ -33,94 +90,36 @@ const Products = () => {
 	};
 
 	const renderItems = () => {
-		return items.map((el) => {
-			return (
-				<div className='products_item' data-value={el.id}>
-					<h2 className='products_item_title'>{el.name}</h2>
-					<img className='products_item_photo' src={el.img}></img>
-					<p className='products_item_ingredients'>{el.ingredients}</p>
-					<span className='products_item_price'>Cena: {el.price} zł</span>
-					<select>
-						<option value='100'>100 g</option>
-						<option value='200'>200 g</option>
-						<option value='300'>300 g</option>
-						<option value='400'>400 g</option>
-						<option value='500'>500 g</option>
-					</select>
-					<button className='products_item_button' onClick={(e) => addItem(e, el.id)}>Dodaj</button>
-				</div>
-			);
-			{
-				console.log(el);
-			}
-		});
+		return (
+			data &&
+			data.map((el: any) => {
+				return (
+					<div className='products_item' data-value={el.id}>
+						<h2 className='products_item_title'>{el.name}</h2>
+						<img className='products_item_photo' src={el.img}></img>
+						<p className='products_item_ingredients'>{el.ingredients}</p>
+						<span className='products_item_price'>Cena: {el.price} zł</span>
+						<select>
+							<option value='100'>100 g</option>
+							<option value='200'>200 g</option>
+							<option value='300'>300 g</option>
+							<option value='400'>400 g</option>
+							<option value='500'>500 g</option>
+						</select>
+						<button
+							className='products_item_button'
+							onClick={(e) => addItem(e, el.id)}>
+							Dodaj
+						</button>
+					</div>
+				);
+			})
+		);
 	};
 
 	return (
-		// <div className='products'>
-		// 	<div className='products_item'>
-		// 		<h2>Torty</h2>
-		// 		<div className='products_item_photo'></div>
-		// 		<p>Od 200 zł</p>
-		// 		<select>
-		// 						<option value='100'>100g</option>
-		// 						<option value='200'>200g</option>
-		// 						<option value='300'>300g</option>
-		// 						<option value='400'>400g</option>
-		// 						<option value='500'>500g</option>
-		// 					</select>
-		// 		<button onClick={(e) => addItem(e, 25)}>Zobacz więcej</button>
-		// 	</div>
-		// 	<div className='products_item'>
-		// 		<h2>Ciasta</h2>
-		// 		<div className='products_item_photo'></div>
-		// 		<p>Od 100 zł</p>
-		// 		<select>
-		// 						<option value='100'>100g</option>
-		// 						<option value='200'>200g</option>
-		// 						<option value='300'>300g</option>
-		// 						<option value='400'>400g</option>
-		// 						<option value='500'>500g</option>
-		// 					</select>
-		// 		<button onClick={(e) => addItem(e, 26)}>Zobacz więcej</button>
-		// 	</div>
-		// 	<div className='products_item'>
-		// 		<h2>Desery</h2>
-		// 		<div className='products_item_photo'></div>
-		// 		<p>Od 50 zł</p>
-		// 		<select>
-		// 						<option value='100'>100g</option>
-		// 						<option value='200'>200g</option>
-		// 						<option value='300'>300g</option>
-		// 						<option value='400'>400g</option>
-		// 						<option value='500'>500g</option>
-		// 					</select>
-		// 		<button onClick={(e) => addItem(e, 27)}>Zobacz więcej</button>
-		// 	</div>
-		// </div>
-
 		<>
 			<div className='products'>{renderItems()}</div>
-			<form name="contact" method="POST" data-netlify="true">
-  <p>
-    <label>Your Name: <input type="text" name="name" /></label>
-  </p>
-  <p>
-    <label>Your Email: <input type="email" name="email" /></label>
-  </p>
-  <p>
-    <label>Your Role: <select name="role[]" multiple>
-      <option value="leader">Leader</option>
-      <option value="follower">Follower</option>
-    </select></label>
-  </p>
-  <p>
-    <label>Message: <textarea name="message"></textarea></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
-</form>
 		</>
 	);
 };
