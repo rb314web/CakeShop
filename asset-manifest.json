@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/CakeShop/static/css/main.75844f76.css",
-    "main.js": "/CakeShop/static/js/main.1284b75b.js",
-    "static/js/787.5fc97e39.chunk.js": "/CakeShop/static/js/787.5fc97e39.chunk.js",
-    "static/media/desserts.jpg": "/CakeShop/static/media/desserts.99e3634f44ae39ed0f09.jpg",
-    "static/media/pasta-gdad9646c0_1280.jpg": "/CakeShop/static/media/pasta-gdad9646c0_1280.37b66f80668f8cffbfc5.jpg",
-    "static/media/herbs-g96e2f6537_1280.jpg": "/CakeShop/static/media/herbs-g96e2f6537_1280.3b6f5662d030c05c9cba.jpg",
-    "static/media/cookie.png": "/CakeShop/static/media/cookie.c86c522b51ddb3440a77.png",
-    "index.html": "/CakeShop/index.html",
-    "static/media/x .svg": "/CakeShop/static/media/x .56e6885c31ab42b6070134487d2a2e92.svg",
-    "main.75844f76.css.map": "/CakeShop/static/css/main.75844f76.css.map",
-    "main.1284b75b.js.map": "/CakeShop/static/js/main.1284b75b.js.map",
-    "787.5fc97e39.chunk.js.map": "/CakeShop/static/js/787.5fc97e39.chunk.js.map"
+    "main.css": "/static/css/main.8007029d.css",
+    "main.js": "/static/js/main.431e56bd.js",
+    "static/js/787.5fc97e39.chunk.js": "/static/js/787.5fc97e39.chunk.js",
+    "static/media/desserts.jpg": "/static/media/desserts.99e3634f44ae39ed0f09.jpg",
+    "static/media/pasta-gdad9646c0_1280.jpg": "/static/media/pasta-gdad9646c0_1280.37b66f80668f8cffbfc5.jpg",
+    "static/media/herbs-g96e2f6537_1280.jpg": "/static/media/herbs-g96e2f6537_1280.3b6f5662d030c05c9cba.jpg",
+    "static/media/cookie.png": "/static/media/cookie.c86c522b51ddb3440a77.png",
+    "index.html": "/index.html",
+    "static/media/x .svg": "/static/media/x .56e6885c31ab42b6070134487d2a2e92.svg",
+    "main.8007029d.css.map": "/static/css/main.8007029d.css.map",
+    "main.431e56bd.js.map": "/static/js/main.431e56bd.js.map",
+    "787.5fc97e39.chunk.js.map": "/static/js/787.5fc97e39.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75844f76.css",
-    "static/js/main.1284b75b.js"
+    "static/css/main.8007029d.css",
+    "static/js/main.431e56bd.js"
   ]
 }
