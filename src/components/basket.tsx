@@ -42,7 +42,7 @@ export const Basket123 = () => {
 	const SummaryPrice = () => {
 		let w: number = 0;
 
-		context.map((y: any) => {
+		context.forEach((y: any) => {
 			const obj = data.find((x:any) => x.id === y.id);
 
 			w = (obj!.price * y.quantity) / 100 + w;
@@ -50,7 +50,7 @@ export const Basket123 = () => {
 		return w;
 	};
 
-	const basketItem = (id: number, quantity: number) => {
+	const basketItem = (id: number, quantity: number, index:number) => {
 		const findObject = () => {
 			return data.findIndex((x:any) => x.id === id);
 		};
@@ -64,7 +64,6 @@ export const Basket123 = () => {
 		};
 
 		const changeWeight = (task: string, minmax: number, id: number) => {
-			console.log(minmax);
 			setContext((prev: any) =>
 				prev.map((el: { id: number; quantity: number }) =>
 					el.id == id
@@ -90,7 +89,6 @@ export const Basket123 = () => {
 				)
 			);
 
-			console.log(value);
 
 			let wq = context.filter(function (e: { id: number }) {
 				return Number(e.id) !== value;
@@ -105,7 +103,7 @@ export const Basket123 = () => {
 		};
 
 		return (
-			<div data-value={data[w].id} className='basket_items_item'>
+			<div data-value={data[w].id} className='basket_items_item' key={index}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<h2>{data[w].name}</h2>
 					<span style={{cursor: 'pointer'}} onClick={(e) => deleteItem(e)}>x</span>
@@ -146,8 +144,9 @@ export const Basket123 = () => {
 			{!!context.length && (
 				<>
 					<div className='basket_items'>
-						{context.map((e: any) => {
-							return basketItem(e.id, e.quantity);
+						{context.map((e: any, index:number) => {
+							console.log(data, 'data')
+							return data ? basketItem(e.id, e.quantity, index) : null
 						})}
 					</div>
 					<div className='basket_summary'>

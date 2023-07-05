@@ -22,11 +22,14 @@ const Login = () => {
 				const user = userCredential.user;
 				navigate('/');
 				setUserContext(user);
+				localStorage.setItem('my-test-app-currentUser', JSON.stringify(user));
 			})
 			.catch((error) => {
 				const errorCode = error.code;
 				const errorMessage = error.message;
-				console.log(errorCode, errorMessage);
+				console.log('Błędny login lub hasło');
+				document.querySelector<HTMLElement>('.login_section_form_error')!.style.display = 'block'
+
 			});
 	};
 
@@ -59,6 +62,7 @@ const Login = () => {
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
+					<span className='login_section_form_error'>Błędny login lub hasło!</span>
 
 					<div className='login_section_form_item'>
 						<button onClick={onLogin}>Zaloguj się</button>

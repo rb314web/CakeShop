@@ -2,22 +2,32 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cookie from '../cookie.png';
 import {Basket123} from './basket'
+import { useNavigate } from "react-router-dom";
 
 import './navigation.scss';
 import Basket from '../Basket.png';
 import User from '../User.png';
 
-import { Context } from './context';
+import { Context, UserContext } from './context';
 
 import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
 import { db } from '../utils/firebase'
 
+import { auth } from '../utils/firebase';
+import { signOut } from 'firebase/auth';
+
 const Navigation = () => {
 	const [context, setContext] = useContext<any>(Context);
+
+	const [userContext, setUserContext] = useContext<any>(UserContext);
 
 	const [data, setDate] = useState<any>([]);
 
 	const collectionRef = collection(db, 'testbase');
+
+	const navigate = useNavigate();
+
+
 
 	useEffect(() => {
 		const getTodo = async () => {
@@ -39,6 +49,7 @@ const Navigation = () => {
 		  }
 		getTodo()
 		}, [])
+
 
 	useEffect(() => {
 		SummaryPrice();
@@ -147,6 +158,15 @@ const Navigation = () => {
 		setContext(wq);
 	};
 
+	const out = () => {
+
+
+		signOut(auth)
+		localStorage.removeItem("my-test-app-currentUser");
+		setUserContext(null)
+		navigate("/");
+	}
+
 	return (
 		<nav className='navigation'>
 			<Link to='/'>
@@ -167,12 +187,17 @@ const Navigation = () => {
 				<li>
 					<Link to='/contact'>Kontakt</Link>
 				</li>
-				<li className='navigation_item_user'>
-					<Link to='/login'>
+				{!userContext?.providerData && (<li className='navigation_item_login'><Link to='/login'>Zaloguj się!</Link></li>)}
+
+				{userContext?.providerData  && (<li>
+					<a onClick={out}>Wyloguj</a>
+				</li>)}
+				{userContext?.providerData && (<li >
+					<Link to='/settings'>
 						<img src={User}></img>
 					</Link>
-				</li>
-				<li onClick={toogleBasket}>
+				</li>)}
+				<li className='navigation_item_basket' onClick={toogleBasket}>
 					<img src={Basket}></img>
 					{context?.length > 0 ? <span>{context.length}</span> : null}
 				</li>

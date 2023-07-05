@@ -40,7 +40,6 @@ const Products = () => {
 			.catch((error) => {
 				console.log(error);
 			});
-		console.log(formData);
 	};
 
 	const collectionRef = collection(db, 'testbase');
@@ -53,8 +52,6 @@ const Products = () => {
 				.then((todo) => {
 					todo.forEach((doc) => {
 						x = [...x, doc.data()];
-
-						console.log(x);
 						setDate(x);
 					});
 				})
@@ -72,7 +69,7 @@ const Products = () => {
 			const index = context.map((e: { id: any }) => e.id).indexOf(id);
 
 			setContext((prev: any) =>
-				prev.map((el: { id: number; quantity: number }) =>
+				prev.map((el: { id: number; quantity: number },index: number) =>
 					el.id == id
 						? {
 								id: el.id,
@@ -80,6 +77,7 @@ const Products = () => {
 									el.quantity + quantity <= 500
 										? el.quantity + quantity
 										: el.quantity,
+										key: index,
 						  }
 						: el
 				)
@@ -92,9 +90,9 @@ const Products = () => {
 	const renderItems = () => {
 		return (
 			data &&
-			data.map((el: any) => {
+			data.map((el: any, index: number) => {
 				return (
-					<div className='products_item' data-value={el.id}>
+					<div className='products_item' data-value={el.id} key={index}>
 						<h2 className='products_item_title'>{el.name}</h2>
 						<img className='products_item_photo' src={el.img}></img>
 						<p className='products_item_ingredients'>{el.ingredients}</p>

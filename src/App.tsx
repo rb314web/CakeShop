@@ -18,6 +18,7 @@ import Login from './components/login';
 import Signup from './components/singup';
 import { signOut } from 'firebase/auth';
 import Contact from './components/contact';
+import UserSettings from './components/usersettings';
 
 import { UserContext, Context } from './components/context';
 
@@ -26,8 +27,25 @@ import cookies from './components/cookies';
 function App() {
 	const [context, setContext] = useState<any>([]);
 	const [userContext, setUserContext] = useState<any>(UserContext);
+	const [user, setUser] = useState<any>(null);
+
+	useEffect( ()=> {
+		document.querySelectorAll('.navigation_item li').forEach((e) => {
+			e.addEventListener('click', () => {
+				document.querySelector('.navigation_item')?.classList.remove('navigation_item_active')
+				console.log('aaaaaaaaaaaa')
+			})
+		})
+	},[])
 
 	useEffect(() => {
+
+		const www = localStorage.getItem('my-test-app-currentUser');
+		
+		if (!!www) setUserContext(JSON.parse(www!))
+
+
+
 		if (!!cookies.get('cont')) {
 			setContext(cookies.get('cont'));
 			console.log(cookies.get('cont'), 'sssss');
@@ -39,6 +57,7 @@ function App() {
 
 	useEffect(() => {
 		cookies.set('cont', context);
+		console.log(cookies.get('cont'))
 	}, [context]);
 
 	const navigate = useNavigate();
@@ -58,9 +77,13 @@ function App() {
 	return (
 		<Context.Provider value={[context, setContext]}>
 			<UserContext.Provider value={[userContext, setUserContext]}>
-				<Navigation />
 
+			<div className='App'>
+				<Navigation/>
 				<Content />
+				<Basket123 />
+
+		</div>
 
 			</UserContext.Provider>
 		</Context.Provider>
@@ -87,14 +110,15 @@ function Content() {
 		  }
 		}}
 	  >
+
 				<Routes>
 					<Route path='/' element={<><Header /><About/></>} />
 					<Route path='/signup' element={<Signup />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/products' element={<Products />} />
 					<Route path='/contact' element={<Contact />} />
+					<Route path='/settings' element={<UserSettings />} />
 				</Routes>
-				<Basket123 />
 
 <Footer />
 	  </div>

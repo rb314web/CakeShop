@@ -6,7 +6,11 @@
 	height: 80px;
 	width: 100%;
 	background-color: #333;
-	z-index: 100;
+	z-index: 10;
+
+	a {
+		text-decoration: none;
+	}
 
 	&_bars {
 		display: none;
@@ -62,6 +66,27 @@
 		align-items: center;
 		list-style: none;
 
+		&_login {
+
+			a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 20px;
+			padding: 10px 25px;
+			font-size: 15px;
+			border-radius: 8px;
+			border: none;
+			color: white;
+			background-color: #078ff2;
+			cursor: pointer;
+			}
+		}
+
+		&_basket {
+			position: relative;
+		}
+		
 		&_user::after {
 			content: '';
 		}
@@ -101,20 +126,27 @@
 		padding: 0 20px;
 		&_item {
 			position: fixed;
-			top: 0;
-			right: 0;
+			top: -5px;
+			right: -5px;
 			flex-direction: column;
-			background: #c0c0c0;
+			background: #222;
 			width: 100vw;
 			height: 100vh;
 			transform: translatex(100vw);
 			transition: 1s;
 
+			&_basket {
+				span {
+					top: 10px;
+					right: 10px;
+				}
+			}
+
 			li {
 				padding: 20px;
 				a {
 					font-size: 25px;
-					color: black;
+					color: rgb(230, 230, 230);
 				}
 
 				&:hover {

@@ -12,9 +12,18 @@
 		padding: 20px;
 		background-color: #fff;
 
+		h1 {
+			padding: 20px;
+		}
+
 		&_form {
             display: flex;
             flex-direction: column;
+			padding: 20px;
+
+			&_error {
+				display: none;
+			}
 
 			&_item {
                 display: flex;
@@ -22,7 +31,7 @@
                 align-items: center;
 				input {
 					margin: 10px;
-					padding: 5px;
+					padding: 10px;
 				}
 
 			}
