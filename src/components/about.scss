@@ -1,33 +1,39 @@
 .about {
 	padding: 150px;
 
-	&_about {
+	&_item {
 		display: flex;
 		flex-direction: column;
-		padding: 50px 0px;
-
-		h2 {
-			margin: 20px 0;
-		}
-	}
-
-	&_ingredients {
-		display: flex;
 		justify-content: center;
-		align-items: center;
-		flex-direction: row-reverse;
+		align-items: flex-start;
 		padding: 50px 0px;
-		flex-direction: column;
 
 		h2 {
 			margin: 20px 0;
+			
+			&::after {
+				content: "";
+				display: block;
+				height: 5px;
+				width: 50px;
+				margin-top: 10px;
+				background-color: #078ff2;
+			}
 		}
+
+		p {
+			text-align: initial;
+			line-height: 1.8;
+			color: #333;
+		}
+
 	}
+
 
 	img {
-		height: 300px;
+		width: 50vw;
 		border-radius: 8px;
-		padding: 20px;
+		margin-top: 20px;
 	}
 }
 
