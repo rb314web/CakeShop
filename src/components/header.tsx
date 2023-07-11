@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import './header.scss';
-import Arrow from '../Arrow 1.png'
+import Arrow from '../assets/Arrow 1.png'
 
 import { UserContext } from './context';
 

@@ -9,7 +9,7 @@ const Contact = () => {
 
 
     const sendEmail = (e:any) => {
-      e.preventDefault(); // prevents the page from reloading when you hit “Send”
+      e.preventDefault();
 
 
       if(form.current?.[0].value != '' && form.current?.[1].value != '' && form.current?.[2].value != '' && form.current?.[3].value != '') {

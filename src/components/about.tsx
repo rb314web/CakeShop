@@ -1,6 +1,6 @@
 import './about.scss';
-import Photo1 from '../pasta-gdad9646c0_1280.jpg';
-import Photo2 from '../herbs-g96e2f6537_1280.jpg';
+import Photo1 from '../assets/pasta-gdad9646c0_1280.jpg';
+import Photo2 from '../assets/herbs-g96e2f6537_1280.jpg';
 
 const About = () => {
 	return (
@@ -17,10 +17,7 @@ const About = () => {
 
 				<h2>Najwyższej jakości składniki</h2>
 				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque nisi
-					voluptate quod deleniti recusandae nesciunt sed exercitationem error.
-					Harum laborum reprehenderit eius alias, quis amet quae magni.
-					Voluptatibus, corrupti laudantium.
+				Odkryj niezwykły świat smaków w naszej cukierni! Nasze wyjątkowe składniki są tajemnicą naszych przepisów na doskonałe wypieki. Każdy składnik został starannie wybrany, aby zapewnić Ci niezapomniane doznania kulinarne.
 				</p>
                 <img src={Photo2}></img>
 			</div>

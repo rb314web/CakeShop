@@ -1,5 +1,5 @@
 import './footer.scss';
-import Cookie from '../cookie.png';
+import Cookie from '../assets/cookie.png';
 
 const Footer = () => {
 	return (

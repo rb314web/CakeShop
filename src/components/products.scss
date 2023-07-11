@@ -1,16 +1,17 @@
 .products {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
-	align-items: center;
-	padding-top: 200px;
+	justify-content: center;
+	align-items: flex-start;
+	padding-top: 100px;
+	min-height: calc(100vh - 200px);
 
 	&_item {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		width: 400px;
-		height: auto;
+		height: 550px;
 		margin: 15px;
 		align-items: center;
 		background-color: #fff;
@@ -69,7 +70,7 @@
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 300px) {
 	.products {
 		flex-direction: column;
 		

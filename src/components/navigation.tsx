@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Cookie from '../cookie.png';
+import Cookie from '../assets/cookie.png';
 import {Basket123} from './basket'
 import { useNavigate } from "react-router-dom";
 
 import './navigation.scss';
-import Basket from '../Basket.png';
-import User from '../User.png';
+import Basket from '../assets/Basket.png';
+import User from '../assets/User.png';
 
 import { Context, UserContext } from './context';
 

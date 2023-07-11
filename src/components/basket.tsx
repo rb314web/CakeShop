@@ -5,7 +5,7 @@ import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore
 import { db } from '../utils/firebase'
 
 import './basket.scss';
-import {ReactComponent as X} from '../x .svg'
+import {ReactComponent as X} from '../assets/x .svg'
 
 export const Basket123 = () => {
 	const [context, setContext] = useContext<any>(Context);
