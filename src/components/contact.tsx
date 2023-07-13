@@ -40,6 +40,7 @@ const Contact = () => {
   }
 
   return (
+    <div className='contact'>
     <div className="contact-container">
       <h2>Kontakt</h2>
       <form ref={form} className="contact-form" onSubmit={sendEmail}>
@@ -58,6 +59,7 @@ const Contact = () => {
         <button type="submit">Wyślij</button>
       </form>
       <span className='contact-container_error'>Wypełnij wszystkie pola!</span>
+    </div>
     </div>
   );
 };

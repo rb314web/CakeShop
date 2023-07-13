@@ -1,0 +1,26 @@
+.order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .form-label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      
+      .form-input {
+        margin-left: 10px;
+      }
+      
+      .form-button {
+        margin-top: 10px;
+      }
+}
+

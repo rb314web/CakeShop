@@ -1,209 +1,211 @@
-import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Cookie from '../assets/cookie.png';
-import {Basket123} from './basket'
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Cookie from "../assets/cookie.png";
+import { Basket123 } from "./basket";
 import { useNavigate } from "react-router-dom";
 
-import './navigation.scss';
-import Basket from '../assets/Basket.png';
-import User from '../assets/User.png';
+import "./navigation.scss";
+import Basket from "../assets/Basket.png";
+import User from "../assets/User.png";
 
-import { Context, UserContext } from './context';
+import { Context, UserContext } from "./context";
 
-import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
-import { db } from '../utils/firebase'
+import {
+  collection,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../utils/firebase";
 
-import { auth } from '../utils/firebase';
-import { signOut } from 'firebase/auth';
+import { auth } from "../utils/firebase";
+import { signOut } from "firebase/auth";
 
 const Navigation = () => {
-	const [context, setContext] = useContext<any>(Context);
+  const [context, setContext] = useContext<any>(Context);
 
-	const [userContext, setUserContext] = useContext<any>(UserContext);
+  const [userContext, setUserContext] = useContext<any>(UserContext);
 
-	const [data, setDate] = useState<any>([]);
+  const [data, setDate] = useState<any>([]);
 
-	const collectionRef = collection(db, 'testbase');
+  const collectionRef = collection(db, "testbase");
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const getTodo = async () => {
+      let x: any = [];
 
+      await getDocs(collectionRef)
+        .then((todo) => {
+          todo.forEach((doc) => {
+            x = [...x, doc.data()];
 
-	useEffect(() => {
-		const getTodo = async () => {
+            console.log("dsdsds", x);
+            setDate(x);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getTodo();
+  }, []);
 
-			let x:any = []
+  useEffect(() => {
+    SummaryPrice();
+  }, [context]);
 
-		  await getDocs(collectionRef).then((todo) => {
-			  todo.forEach(doc => {
+  const toogleBasket = () => {
+    const basket = document.querySelector(".basket");
 
-				x = [...x, doc.data()]
+    basket?.classList.toggle("basket_active");
+  };
 
-				console.log('dsdsds',x);
-				setDate( x)
-			})
+  const basket2 = () => {
+    document
+      .querySelector(".navigation_item")
+      ?.classList.toggle("navigation_item_active");
+  };
 
-		}).catch((err) => {
-			console.log(err);
-			})
-		  }
-		getTodo()
-		}, [])
+  const basketItem = (id: number, quantity: number) => {
+    const findObject = () => {
+      return data.findIndex((x: any) => x.id === id);
+    };
+    let w = findObject();
 
+    const test = (id: any) => {
+      let x = context.find((x: { id: any }) => x.id === id);
+      console.log(x);
 
-	useEffect(() => {
-		SummaryPrice();
-	}, [context]);
+      return quantity;
+    };
 
-	const toogleBasket = () => {
-		const basket = document.querySelector('.basket');
+    const changeWeight = (task: string, minmax: number, id: number) => {
+      console.log(minmax);
+      setContext((prev: any) =>
+        prev.map((el: { id: number; quantity: number }) =>
+          el.id == id
+            ? {
+                id: el.id,
+                quantity: (
+                  task == "add" ? el.quantity < minmax : el.quantity > minmax
+                )
+                  ? task == "add"
+                    ? el.quantity + 100
+                    : el.quantity - 100
+                  : el.quantity,
+              }
+            : el
+        )
+      );
+    };
 
-		basket?.classList.toggle('basket_active');
-	};
+    return (
+      <div data-value={data[w].id} className="navigation_basket_data_item">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>{data[w].name}</h2>
+          <p onClick={(e) => deleteItem(e)}>X</p>
+        </div>
+        <div className="navigation_basket_data_item_wrapper">
+          <img src={data[w].img}></img>
 
-	const basket2 = () => {
-		document
-			.querySelector('.navigation_item')
-			?.classList.toggle('navigation_item_active');
-	};
+          <div>
+            <p className="navigation_basket_data_item_ingredients">
+              {data[w].ingredients}
+            </p>
+            <div className="navigation_basket_data_item_wrapper2">
+              <button onClick={() => changeWeight("subtract", 100, data[w].id)}>
+                -
+              </button>
+              <p>{test(id)}g</p>
+              <button onClick={() => changeWeight("add", 500, data[w].id)}>
+                +
+              </button>
+              <p className="navigation_basket_data_item_price">
+                {price(data[w], quantity)} zł
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-	const basketItem = (id: number, quantity: number) => {
-		const findObject = () => {
-			return data.findIndex((x:any) => x.id === id);
-		};
-		let w = findObject();
+  const SummaryPrice = () => {
+    let w: number = 0;
 
-		const test = (id: any) => {
-			let x = context.find((x: { id: any }) => x.id === id);
-			console.log(x);
+    context.map((y: any) => {
+      const obj = data.find((x: any) => x.id === y.id);
 
-			return quantity;
-		};
+      w = (obj!.price * y.quantity) / 100 + w;
+    });
+    return w;
+  };
 
-		const changeWeight = (task: string, minmax: number, id: number) => {
-			console.log(minmax);
-			setContext((prev: any) =>
-				prev.map((el: { id: number; quantity: number }) =>
-					el.id == id
-						? {
-								id: el.id,
-								quantity: (
-									task == 'add' ? el.quantity < minmax : el.quantity > minmax
-								)
-									? task == 'add'
-										? el.quantity + 100
-										: el.quantity - 100
-									: el.quantity,
-						  }
-						: el
-				)
-			);
-		};
+  const price = (data: { price: number }, quantity: number) => {
+    return (data.price * quantity) / 100;
+  };
 
-		return (
-			<div data-value={data[w].id} className='navigation_basket_data_item'>
-				<div style={{display: 'flex', justifyContent: 'space-between'}}>
-					<h2>{data[w].name}</h2>
-					<p onClick={(e) => deleteItem(e)}>X</p>
-				</div>
-				<div className='navigation_basket_data_item_wrapper'>
-					<img src={data[w].img}></img>
+  const deleteItem = (e: any) => {
+    const value = Number(
+      e.target.offsetParent.firstElementChild.nextElementSibling.firstChild.getAttribute(
+        "data-value"
+      )
+    );
 
-					<div>
-						<p className='navigation_basket_data_item_ingredients'>
-							{data[w].ingredients}
-						</p>
-						<div className='navigation_basket_data_item_wrapper2'>
-								<button
-									onClick={() => changeWeight('subtract', 100, data[w].id)}>
-									-
-								</button>
-							<p>{test(id)}g</p>
-							<button onClick={() => changeWeight('add', 500, data[w].id)}>
-								+
-							</button>
-							<p className='navigation_basket_data_item_price'>
-								{price(data[w], quantity)} zł
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	};
+    let wq = context.filter(function (e: { id: number }) {
+      return e.id !== value;
+    });
 
-	const SummaryPrice = () => {
-		let w: number = 0;
+    console.log(e);
+    setContext(wq);
+  };
 
-		context.map((y: any) => {
-			const obj = data.find((x:any) => x.id === y.id);
+  const out = () => {
+    signOut(auth);
+    localStorage.removeItem("my-test-app-currentUser");
+    setUserContext(null);
+    navigate("/");
+  };
 
-			w = (obj!.price * y.quantity) / 100 + w;
-		});
-		return w;
-	};
+  return (
+    <nav className="navigation">
+      <Link to="/">
+        <div className="navigation_logo">
+          <img className="navigation_logo_img" src={Cookie}></img> Ciasta
+        </div>
+      </Link>
+      <div onClick={basket2} className="navigation_bars">
+        <span></span>
+      </div>
+      <div className="navigation_item">
+        <Link to="/">Strona główna</Link>
 
-	const price = (data: { price: number }, quantity: number) => {
-		return (data.price * quantity) / 100;
-	};
+        <Link to="/products">Produkty</Link>
 
-	const deleteItem = (e: any) => {
-		const value = Number(e.target.offsetParent.firstElementChild.nextElementSibling.firstChild.getAttribute('data-value'));
+        <Link to="/contact">Kontakt</Link>
 
-		let wq = context.filter(function (e: { id: number }) {
-			return e.id !== value;
-		});
+		<a className="navigation_item_basket" onClick={toogleBasket}>
+          <img src={Basket}></img>
+          {context?.length > 0 ? <span>{context.length}</span> : null}
+        </a>
 
-		console.log(e);
-		setContext(wq);
-	};
+        {!userContext?.providerData && (
+            <Link className="navigation_item_login" to="/login">Zaloguj się!</Link>
+        )}
 
-	const out = () => {
+        {userContext?.providerData && (
 
+            <a onClick={out}>Wyloguj</a>
 
-		signOut(auth)
-		localStorage.removeItem("my-test-app-currentUser");
-		setUserContext(null)
-		navigate("/");
-	}
-
-	return (
-		<nav className='navigation'>
-			<Link to='/'>
-			<div className='navigation_logo'>
-				<img className='navigation_logo_img' src={Cookie}></img> Ciasta
-			</div>
-			</Link>
-			<div onClick={basket2} className='navigation_bars'>
-				<span></span>
-			</div>
-			<div className='navigation_item'>
-				<li>
-					<Link to='/'>Strona główna</Link>
-				</li>
-				<li>
-					<Link to='/products'>Produkty</Link>
-				</li>
-				<li>
-					<Link to='/contact'>Kontakt</Link>
-				</li>
-				{!userContext?.providerData && (<li className='navigation_item_login'><Link to='/login'>Zaloguj się!</Link></li>)}
-
-				{userContext?.providerData  && (<li>
-					<a onClick={out}>Wyloguj</a>
-				</li>)}
-				{userContext?.providerData && (<li >
-					<Link to='/settings'>
-						<img src={User}></img>
-					</Link>
-				</li>)}
-				<li className='navigation_item_basket' onClick={toogleBasket}>
-					<img src={Basket}></img>
-					{context?.length > 0 ? <span>{context.length}</span> : null}
-				</li>
-			</div>
-		</nav>
-	);
+        )}
+        {userContext?.providerData && (
+            <Link to="/settings">
+              <img src={User}></img>
+            </Link>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 export default Navigation;

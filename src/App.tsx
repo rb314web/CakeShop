@@ -19,6 +19,7 @@ import Signup from './components/singup';
 import { signOut } from 'firebase/auth';
 import Contact from './components/contact';
 import UserSettings from './components/usersettings';
+import Order from './components/order';
 
 import { UserContext, Context } from './components/context';
 
@@ -30,7 +31,7 @@ function App() {
 	const [user, setUser] = useState<any>(null);
 
 	useEffect( ()=> {
-		document.querySelectorAll('.navigation_item li').forEach((e) => {
+		document.querySelectorAll('.navigation_item a').forEach((e) => {
 			e.addEventListener('click', () => {
 				document.querySelector('.navigation_item')?.classList.remove('navigation_item_active')
 				console.log('aaaaaaaaaaaa')
@@ -118,6 +119,7 @@ function Content() {
 					<Route path='/products' element={<Products />} />
 					<Route path='/contact' element={<Contact />} />
 					<Route path='/settings' element={<UserSettings />} />
+					<Route path='/order' element={<Order />} />
 				</Routes>
 
 <Footer />
