@@ -2,25 +2,98 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
-    background-color: #fff;
 
-    .form-container {
-        max-width: 400px;
-        margin: 0 auto;
-      }
-      
-      .form-label {
-        display: block;
-        margin-bottom: 10px;
-      }
-      
-      .form-input {
-        margin-left: 10px;
-      }
-      
-      .form-button {
-        margin-top: 10px;
-      }
+    &_item {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        width: 400px;
+        background-color: #ffffff;
+        border-radius: 8px;
+
+        &_header {
+            display: flex;
+            justify-content: space-between;
+
+            h2 {
+                margin: 0;
+            }
+        }
+
+        &_content {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                margin-right: 10px;
+                border-radius: 8px;
+            }
+        }
+
+        &_details {
+            flex-grow: 1;
+        }
+
+        &_ingredients {
+            color: #555;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        &_info{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &_price {
+            font-weight: bold;
+        }
+
+    }
+
 }
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  
+  .order_form_label {
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .order_form_input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px
+  }
+  
+  .order_form_button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .order_form_button:hover {
+    background-color: #0056b3;
+  }
+  
+  .order_form_button:focus {
+    outline: none;
+  }
 
