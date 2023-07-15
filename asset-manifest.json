@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/CakeShop/static/css/main.e15ffd62.css",
+    "main.css": "/CakeShop/static/css/main.03791cc8.css",
     "main.js": "/CakeShop/static/js/main.4ab4438d.js",
     "static/js/787.5fc97e39.chunk.js": "/CakeShop/static/js/787.5fc97e39.chunk.js",
     "static/media/desserts.jpg": "/CakeShop/static/media/desserts.99e3634f44ae39ed0f09.jpg",
@@ -9,12 +9,12 @@
     "static/media/cookie.png": "/CakeShop/static/media/cookie.c86c522b51ddb3440a77.png",
     "index.html": "/CakeShop/index.html",
     "static/media/x .svg": "/CakeShop/static/media/x .56e6885c31ab42b6070134487d2a2e92.svg",
-    "main.e15ffd62.css.map": "/CakeShop/static/css/main.e15ffd62.css.map",
+    "main.03791cc8.css.map": "/CakeShop/static/css/main.03791cc8.css.map",
     "main.4ab4438d.js.map": "/CakeShop/static/js/main.4ab4438d.js.map",
     "787.5fc97e39.chunk.js.map": "/CakeShop/static/js/787.5fc97e39.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e15ffd62.css",
+    "static/css/main.03791cc8.css",
     "static/js/main.4ab4438d.js"
   ]
 }
