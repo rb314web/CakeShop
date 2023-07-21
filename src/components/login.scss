@@ -1,40 +1,73 @@
 .login {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-	&_section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 20px;
-		background-color: #fff;
+  &_photo {
+    width: 50%;
+    height: 100%;
+    background-image: url("https://cdn.pixabay.com/photo/2015/08/25/03/50/herbs-906140_1280.jpg");
+    background-size: cover;
+    background-position: center;
+  }
 
-		h1 {
-			padding: 20px;
-		}
+  &_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9fafc;
+    width: 50%;
+    height: 100%;
 
-		&_form {
-            display: flex;
-            flex-direction: column;
-			padding: 20px;
+    h1 {
+      padding: 20px;
+    }
 
-			&_error {
-				display: none;
-			}
+    &_form {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
 
-			&_item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-				input {
-					margin: 10px;
-					padding: 10px;
-				}
+      &_error {
+        display: none;
+      }
 
-			}
-		}
-	}
+      &_item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+          margin: 10px;
+          padding: 10px;
+        }
+      }
+
+	  button {
+		padding: 10px 50px;
+		margin: 30px;
+		border: none;
+		border-radius: 8px;
+		background-color: #007bff;
+		color: #f9fafc;
+	  }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login {
+    flex-direction: column;
+    margin-top: 80px;
+
+    &_section {
+      width: 100%;
+    }
+
+    &_photo {
+      width: 100%;
+    }
+  }
 }

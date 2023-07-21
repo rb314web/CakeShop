@@ -133,6 +133,10 @@
 			transform: translatex(100vw);
 			transition: 1s;
 
+			a {
+				height: 100px;
+			}
+
 			&_basket {
 				span {
 					top: 10px;

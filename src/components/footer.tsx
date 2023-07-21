@@ -10,7 +10,7 @@ const Footer = () => {
 				<p>ul. Kolorowa 41</p>
 				<p>65-562 Warszawa</p>
 				<p>Telefon: <a href="tel:658-658-652">658-658-652</a></p>
-				<p>E-mail: <a href="mailto:biuro@ciastka.pl">biuro@ciastka.pl</a></p>
+				<p>E-mail: <a href="mailto:biuro@ciastka.pl">biuro@ciasta.pl</a></p>
 			</div>
 		</div>
 	);

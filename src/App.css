@@ -3,7 +3,7 @@
 	overflow: hidden;
 }
 
-button {
+/* button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -15,14 +15,16 @@ button {
 	color: white;
 	background-color: #078ff2;
 	cursor: pointer;
-}
+} */
 
 .fadeIn {
+	display: block;
 	animation: .2s fadeIn forwards;
 	z-index: 0;
 }
 
 .fadeOut {
+	display: block;
 	animation: .2s fadeOut forwards;
 }
 

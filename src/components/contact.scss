@@ -1,68 +1,87 @@
 .contact {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin-top: 80px;
 
-}
-
-.contact-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #fff;
-  margin: 100px 10px;
-  max-width: 400px;
-  border-radius: 8px;
-
-  h2 {
-    padding-top: 50px;
+  h2{
+    margin: 100px;
   }
 
-  &_error {
-    display: none;
+  &_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+
+    input {
+      border: none;
+      border-bottom: 1.5px solid #333;
+      margin-bottom: 40px;
+      padding: 10px 0;
+      font-size: 18px;
+      transition: border .1s;
+
+      &:focus {
+        border: none;
+        border-bottom: 1.5px solid #007bff;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+
+    }
+
+    label {
+      text-align: left;
+    }
+
+    button {
+      padding: 10px 50px;
+      margin: 30px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: #f9fafc;
+      cursor: pointer;
+    }
+
+    textarea {
+      font-size: 18px;
+      padding: 10px 0;
+      resize: vertical;
+    }
+
+    &_error {
+      display: none;
+    }
   }
+
+  &_photo {
+    width: 50%;
+    height: 100%;
+    background-image: url("https://cdn.pixabay.com/photo/2018/04/07/08/28/notepad-3297994_1280.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
 }
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  padding: 50px;
-  max-width: 500px;
-}
+@media screen and (max-width: 768px) {
+  .contact {
+    flex-direction: column;
+    margin-top: 80px;
 
-label {
-  padding: 15px;
-  margin-top: 10px;
-}
+    &_section {
+      width: 100%;
+    }
 
-input {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 0 2px 0px #333;
-  
-}
-
-textarea { 
-  width: 300px;
-  resize: vertical; 
-  max-height: 300px; 
-  min-height: 100px; 
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 0 2px 0px #333;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
+    &_photo {
+      width: 100%;
+    }
+  }
 }

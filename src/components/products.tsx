@@ -93,9 +93,12 @@ const Products = () => {
 			data.map((el: any, index: number) => {
 				return (
 					<div className='products_item' data-value={el.id} key={index}>
-						<h2 className='products_item_title'>{el.name}</h2>
 						<img className='products_item_photo' src={el.img}></img>
+						<div>
+						<h2 className='products_item_title'>{el.name}</h2>
 						<p className='products_item_ingredients'>{el.ingredients}</p>
+						</div>
+						<div className='products_item_wrapper'> 
 						<span className='products_item_price'>Cena: {el.price} zł</span>
 						<select>
 							<option value='100'>100 g</option>
@@ -109,6 +112,7 @@ const Products = () => {
 							onClick={(e) => addItem(e, el.id)}>
 							Dodaj
 						</button>
+						</div>
 					</div>
 				);
 			})

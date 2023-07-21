@@ -107,7 +107,8 @@ export const Basket123 = () => {
 		};
 
 		return (
-			<div data-value={data && data[w].id} className='basket_items_item' key={index}>
+			
+			<div data-value={data[w]?.id} className='basket_items_item' key={index}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<h2>{data[w].name}</h2>
 					<span style={{cursor: 'pointer'}} onClick={(e) => deleteItem(e)}>x</span>
