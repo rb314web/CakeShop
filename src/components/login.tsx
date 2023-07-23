@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   signInWithEmailAndPassword,
-  signInWithPopup,
+  signInWithRedirect,
   GoogleAuthProvider,
+  getRedirectResult,
   getAuth,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -22,20 +23,25 @@ const Login = () => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
-  const handleClick = () => {
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        console.log(data.user);
-        setUserContext(data.user);
-        localStorage.setItem(
-          "my-test-app-currentUser",
-          JSON.stringify(data.user)
-        );
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result: any) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+
+        console.log(result.user);
         navigate("/");
+        const user = result.user;
+        setUserContext(user);
       })
-      .catch((data) => {
-        console.log(data);
+      .catch((error) => {
+        console.log(error);
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
       });
+  }, []);
+
+  const handleClick = () => {
+    signInWithRedirect(auth, provider);
   };
 
   const onLogin = (e: any) => {
@@ -65,29 +71,25 @@ const Login = () => {
         <h1> Logowanie </h1>
         <img onClick={handleClick} src={GoogleImg}></img>
         <form className="login_section_form">
-          <div className="login_section_form_item">
-            <label htmlFor="email-address">Email:</label>
-            <input
-              id="email-address"
-              name="email"
-              type="email"
-              required
-              placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+          <label htmlFor="email-address">Email:</label>
+          <input
+            id="email-address"
+            name="email"
+            type="email"
+            required
+            placeholder="Email address"
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-          <div className="login_section_form_item">
-            <label htmlFor="password">Hasło:</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <label htmlFor="password">Hasło:</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <span className="login_section_form_error">
             Błędny login lub hasło!
           </span>

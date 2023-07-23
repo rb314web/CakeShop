@@ -6,15 +6,30 @@ import "./contact.scss";
 const Contact = () => {
   const form = useRef<any>(null);
 
+  let flag = false;
+
+  const validationForm = () => {
+    let err = 0
+    document
+      .querySelectorAll<HTMLInputElement>(".input_validation")
+      .forEach((e) => {
+        console.log(e);
+
+        if (!e.value && flag) {
+          e.style.border = "1px solid red";
+          err =+ 1
+        } else e.style.border = "1px solid #cfcfcf";
+      });
+
+      return err ? false : true
+  };
+
   const sendEmail = (e: any) => {
     e.preventDefault();
+    flag = true;
+    validationForm();
 
-    if (
-      form.current?.[0].value != "" &&
-      form.current?.[1].value != "" &&
-      form.current?.[2].value != "" &&
-      form.current?.[3].value != ""
-    ) {
+    if (validationForm()) {
       emailjs
         .sendForm(
           "service_2lxtghg",
@@ -24,43 +39,66 @@ const Contact = () => {
         )
         .then(
           (result) => {
-            console.log("show the user a success message");
+            const mess = document.createElement("p")
+            const textnode = document.createTextNode("Wiadomość wysłana poprawnie!");
+            mess.appendChild(textnode);
+            mess.classList.add('message-successful');
+            document.querySelector('button')?.after(mess)
           },
           (error) => {
-            console.log("show the user an error");
+            const mess = document.createElement("p")
+            const textnode = document.createTextNode("Błąd wysyłania wiadomości!");
+            mess.appendChild(textnode);
+            mess.classList.add('message-error');
+            document.querySelector('button')?.after(mess)
           }
         );
-      console.log(form.current);
       form.current[0].value = "";
       form.current[1].value = "";
       form.current[2].value = "";
       form.current[3].value = "";
-    } else {
-      document.querySelector<HTMLElement>(
-        ".contact_form_error"
-      )!.style.display = "block";
-      console.log("ters55");
     }
   };
 
   return (
     <div className="contact">
-      <form ref={form} className="contact_form" onSubmit={sendEmail}>
-        <h2>Kontakt</h2>
-        <label>Imie:</label>
-        <input type="text" name="user_name" />
+      <form
+        onChange={validationForm}
+        ref={form}
+        className="contact_form"
+        onSubmit={sendEmail}
+      >
+        <div className="contact_form_wrapper">
+          <h2>Kontakt</h2>
+          <label>Imie:</label>
+          <input
+            className="input_validation"
+            type="text"
+            name="user_name"
+            placeholder="Wpisz swoje imię"
+          />
 
-        <label>Nazwisko:</label>
-        <input type="text" name="user_lastname" />
+          <label>Nazwisko:</label>
+          <input
+            className="input_validation"
+            type="text"
+            name="user_lastname"
+            placeholder="Wpisz swoje nazwisko"
+          />
 
-        <label htmlFor="email">Email:</label>
-        <input type="email" name="user_email" />
+          <label htmlFor="email">Email:</label>
+          <input
+            className="input_validation"
+            type="email"
+            name="user_email"
+            placeholder="Wpisz swój email"
+          />
 
-        <label htmlFor="message">Wiadomość:</label>
-        <textarea name="user_message" />
+          <label htmlFor="message">Wiadomość:</label>
+          <textarea className="input_validation" name="user_message" />
 
-        <button type="submit">Wyślij</button>
-        <span className="contact_form_error">Wypełnij wszystkie pola!</span>
+          <button type="submit">Wyślij</button>
+        </div>
       </form>
       <div className="contact_photo"></div>
     </div>

@@ -1,58 +1,86 @@
 .signup {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
 
-	&_photo {
-		width: 50%;
-		height: 100%;
-		background-image: url('https://cdn.pixabay.com/photo/2017/08/06/06/46/bread-2589595_1280.jpg');
-		background-size: cover;
-		background-position: center;
+  &_photo {
+    width: 50%;
+    height: 100%;
+    background-image: url("https://cdn.pixabay.com/photo/2017/08/06/06/46/bread-2589595_1280.jpg");
+    background-size: cover;
+    background-position: center;
+  }
 
+  &_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 50%;
+    background-color: #fff;
+
+	h1 {
+		margin: 40px 0;
 	}
 
-	&_section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 20px;
-		width: 50%;
-		background-color: #fff;
+    &_form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-		&_form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+      input {
+        border: 1px solid #cfcfcf;
+        border-radius: 30px;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        width: 100%;
+        font-size: 15px;
+      }
 
-			&_item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-				input {
-					margin: 5px;
-					padding: 5px;
-				}
+      label {
+        align-self: flex-start;
+        padding: 5px;
+        font-weight: bold;
+      }
+      button {
+        align-self: center;
+        width: 100%;
+        padding: 10px 50px;
+        margin: 30px;
+        border: none;
+        border-radius: 8px;
+        background-color: #007bff;
+        color: #f9fafc;
+        cursor: pointer;
+      }
 
-			}
-		}
-	}
+      &_item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+          margin: 5px;
+          padding: 5px;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-	.signup {
-		flex-direction: column;
-		margin-top: 80px;
-	
-		&_section {
-			width: 100%;
-		}
-	
-		&_photo {
-			width: 100%;
-		}
-	}
-	  }
+  .signup {
+    flex-direction: column;
+    margin-top: 80px;
+
+    &_section {
+      width: 100%;
+    }
+
+    &_photo {
+      display: none;
+    }
+  }
+}

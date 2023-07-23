@@ -25,9 +25,9 @@ const Order = () => {
 
   const collectionRef = collection(db, "testbase");
 
-  useEffect(()=> {
-    console.log(context,'con1')
-  },[context])
+  useEffect(() => {
+    console.log(context, "con1");
+  }, [context]);
 
   useEffect(() => {
     const getTodo = async () => {
@@ -118,9 +118,9 @@ const Order = () => {
 
   return (
     <>
-    <div className="order">
-    {context.length && (
-<>
+      <div className="order">
+        {context.length && (
+          <>
             <div className="order_items">
               {context.map((e: any, index: number) => {
                 return data ? basketItem(e.id, e.quantity, index) : null;
@@ -133,75 +133,65 @@ const Order = () => {
             <form className="order_form" onSubmit={handleSubmit}>
               <h2 className="order_form_heading">Zamówienie</h2>
               <div className="order_form_wrapper">
-                <label className="order_form_label">
-                  Imię:
-                  <input
-                    type="text"
-                    name="imie"
-                    value={
-                      userContext?.providerData
-                        ? userContext.providerData[0].displayName
-                        : formState.imie
-                    }
-                    onChange={handleInputChange}
-                    className="order_form_input"
-                    placeholder="Wpisz swoje imie"
-                    disabled={!!userContext?.providerData}
-                  />
-                </label>
+                <label className="order_form_label">Imię:</label>
+                <input
+                  type="text"
+                  name="imie"
+                  value={
+                    userContext?.providerData
+                      ? userContext.providerData[0].displayName
+                      : formState.imie
+                  }
+                  onChange={handleInputChange}
+                  className="order_form_input"
+                  placeholder="Wpisz swoje imie"
+                  disabled={!!userContext?.providerData}
+                />
 
-                <label className="order_form_label">
-                  Nazwisko:
-                  <input
-                    type="text"
-                    name="nazwisko"
-                    value={formState.nazwisko}
-                    onChange={handleInputChange}
-                    className="order_form_input"
-                    placeholder="Wpisz swoje nazwisko"
-                  />
-                </label>
+                <label className="order_form_label">Nazwisko:</label>
+                <input
+                  type="text"
+                  name="nazwisko"
+                  value={formState.nazwisko}
+                  onChange={handleInputChange}
+                  className="order_form_input"
+                  placeholder="Wpisz swoje nazwisko"
+                />
 
-                <label className="order_form_label">
-                  Ulica:
-                  <input
-                    type="text"
-                    name="ulica"
-                    value={formState.ulica}
-                    onChange={handleInputChange}
-                    className="order_form_input"
-                    placeholder="Wpisz ulicę zamieszkania"
-                  />
-                </label>
-                <label className="order_form_label">
-                  Email:
-                  <input
-                    type="email"
-                    name="email"
-                    value={
-                      userContext?.providerData
-                        ? userContext.providerData[0].email
-                        : formState.email
-                    }
-                    onChange={handleInputChange}
-                    className="order_form_input"
-                    disabled={!!userContext?.providerData}
-                    placeholder="Wpisz swój email"
-                  />
-                </label>
+                <label className="order_form_label">Ulica:</label>
+                <input
+                  type="text"
+                  name="ulica"
+                  value={formState.ulica}
+                  onChange={handleInputChange}
+                  className="order_form_input"
+                  placeholder="Wpisz ulicę zamieszkania"
+                />
+                <label className="order_form_label">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={
+                    userContext?.providerData
+                      ? userContext.providerData[0].email
+                      : formState.email
+                  }
+                  onChange={handleInputChange}
+                  className="order_form_input"
+                  disabled={!!userContext?.providerData}
+                  placeholder="Wpisz swój email"
+                />
 
                 <button type="submit" className="order_form_button">
                   Dalej
                 </button>
               </div>
             </form>
-            </>
-      )}
-       {!context.length && (
-        <p>Dodaj coś do koszyka 😉</p>
-       )}
-       </div>
-      </>
+          </>
+        )}
+        {!context.length && <p>Dodaj coś do koszyka 😉</p>}
+      </div>
+    </>
   );
 };
 

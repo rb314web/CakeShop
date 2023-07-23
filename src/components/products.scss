@@ -41,6 +41,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 200px;
       margin: 20px;
       padding: 10px 25px;
       font-size: 15px;
@@ -49,6 +50,7 @@
       color: white;
       background-color: #078ff2;
       cursor: pointer;
+      transition: 1s;
     }
 
     &_ingredients {
