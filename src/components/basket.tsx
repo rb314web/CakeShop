@@ -36,6 +36,7 @@ export const Basket123 = () => {
 			})
 		  }
 		getTodo()
+		console.log('totototototototototo',!!data)
 		}, [])
 
 	const toogleBasket = () => {
@@ -107,8 +108,8 @@ export const Basket123 = () => {
 		};
 
 		return (
-			
-			<div data-value={data[w]?.id} className='basket_items_item' key={index}>
+			<>
+			{!!data.length  && (<div data-value={data[w]?.id} className='basket_items_item' key={index}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<h2>{data[w].name}</h2>
 					<span style={{cursor: 'pointer'}} onClick={(e) => deleteItem(e)}>x</span>
@@ -135,7 +136,9 @@ export const Basket123 = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>)}
+
+			</>
 		);
 	};
 
@@ -161,7 +164,7 @@ export const Basket123 = () => {
 						})}
 					</div>
 					<div className='basket_summary'>
-						<p>Łącznie: {SummaryPrice()} zł</p>
+						<p>Łącznie: {data.lenght ? SummaryPrice() : null} zł</p>
 					</div>
 					<p>+ koszt dostawy</p>
 					<button onClick={order}>Zamawiam</button>

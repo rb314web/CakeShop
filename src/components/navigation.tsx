@@ -133,7 +133,7 @@ const Navigation = () => {
   const SummaryPrice = () => {
     let w: number = 0;
 
-    context.map((y: any) => {
+    data.lenght &&  context.map((y: any) => {
       const obj = data.find((x: any) => x.id === y.id);
 
       w = (obj!.price * y.quantity) / 100 + w;

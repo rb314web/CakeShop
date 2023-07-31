@@ -56,9 +56,8 @@ const Order = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // Tutaj możesz dodać kod obsługujący zatwierdzenie formularza, np. wysłanie danych na serwer
-    console.log(formState);
-    console.log(context);
+    alert("Na tym się kończy zamawianie 😉")
+
   };
 
   const basketItem = (id: number, quantity: number, index: number) => {
