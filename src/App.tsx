@@ -42,7 +42,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const www = localStorage.getItem("my-test-app-currentUser");
+    const www = localStorage.getItem("userContext");
 
     if (!!www) setUserContext(JSON.parse(www!));
 

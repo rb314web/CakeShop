@@ -28,7 +28,7 @@ export const Basket123 = () => {
 				x = [...x, doc.data()]
 
 				console.log('dsdsds',x);
-				setDate( x)
+				setDate(x)
 			})
 
 		}).catch((err) => {
@@ -36,7 +36,6 @@ export const Basket123 = () => {
 			})
 		  }
 		getTodo()
-		console.log('totototototototototo',!!data)
 		}, [])
 
 	const toogleBasket = () => {
@@ -155,7 +154,7 @@ export const Basket123 = () => {
 				<span onClick={toogleBasket}>{<X/>}</span>
 			</div>
 
-			{!!context.length && (
+			{!!data.length && (
 				<>
 					<div className='basket_items'>
 						{context.map((e: any, index:number) => {
@@ -164,7 +163,7 @@ export const Basket123 = () => {
 						})}
 					</div>
 					<div className='basket_summary'>
-						<p>Łącznie: {data.lenght ? SummaryPrice() : null} zł</p>
+						<p>Łącznie: {context ? SummaryPrice() : null} zł</p>
 					</div>
 					<p>+ koszt dostawy</p>
 					<button onClick={order}>Zamawiam</button>

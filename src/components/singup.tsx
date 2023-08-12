@@ -95,10 +95,6 @@ const errorMessage = (text: string) => {
         const auth1: any = getAuth();
 
 
-
-
-console.log('toooooo',!validatePassword(password), validationForm(), validationRepeatPassword())
-
 if (!validatePassword(password) && validationForm() && validationRepeatPassword()) {
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -109,6 +105,7 @@ if (!validatePassword(password) && validationForm() && validationRepeatPassword(
           navigate("/login");
           sendEmailVerification(auth1.currentUser);
 })}
+
 
 
   if (!validatePassword(password)) {
